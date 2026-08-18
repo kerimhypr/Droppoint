@@ -1,0 +1,11 @@
+/target/
+node_modules/
+dist/
+*.apk
+*.aab
+*.dmg
+*.AppImage
+*.deb
+*.exe
+.DS_Store
+

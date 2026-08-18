@@ -1,0 +1,20 @@
+[package]
+name = "droppoint-core"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+bytes.workspace = true
+dashmap.workspace = true
+mdns-sd.workspace = true
+rcgen.workspace = true
+rustls.workspace = true
+tokio-rustls.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+uuid.workspace = true
+windows-sys.workspace = true
