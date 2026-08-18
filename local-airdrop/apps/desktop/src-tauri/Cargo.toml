@@ -1,0 +1,15 @@
+[package]
+name = "droppoint-desktop"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+droppoint-core = { path = "../../../crates/core" }
+serde.workspace = true
+tauri = { version = "2", features = ["tray-icon"] }
+tokio.workspace = true
+uuid.workspace = true
+
+[build-dependencies]
+tauri-build = { version = "2" }
+

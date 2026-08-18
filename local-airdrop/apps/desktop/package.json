@@ -1,0 +1,2 @@
+{"name":"droppoint-desktop","private":true,"scripts":{"dev":"vite --host 127.0.0.1","build":"vite build","tauri":"tauri"},"devDependencies":{"@tauri-apps/cli":"^2","vite":"^6"}}
+

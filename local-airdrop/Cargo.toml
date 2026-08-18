@@ -1,0 +1,24 @@
+[workspace]
+resolver = "2"
+members = ["crates/core", "apps/desktop/src-tauri"]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+version = "0.1.0"
+
+[workspace.dependencies]
+anyhow = "1"
+bytes = "1"
+dashmap = "6"
+mdns-sd = "0.11"
+rcgen = "0.13"
+rustls = "0.23"
+tokio-rustls = "0.26"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+thiserror = "2"
+tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "io-util", "sync", "time", "fs"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+windows-sys = { version = "0.59", features = ["Win32_Foundation", "Win32_System_DataExchange", "Win32_System_Memory"] }
