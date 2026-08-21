@@ -1,0 +1,14 @@
+{
+  "name": "browser-discord-reference",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "scripts": {
+    "typecheck": "tsc -b",
+    "build": "pnpm --filter @clone/contracts build && pnpm --filter @clone/client build && pnpm --filter @clone/gateway build",
+    "dev:gateway": "pnpm --filter @clone/gateway dev",
+    "dev:client": "pnpm --filter @clone/client dev"
+  },
+  "devDependencies": {
+    "typescript": "5.8.3"
+  }
+}
