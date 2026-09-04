@@ -1,135 +1,20 @@
 <!doctype html>
 <html lang="tr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#FFFBFE">
-  <title>Droppoint — Web Share</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <main class="shell">
-    <header class="topbar">
-      <div class="brand-lockup">
-        <div class="brand-mark" aria-hidden="true">D</div>
-        <div>
-          <div class="brand">Droppoint</div>
-          <div class="tagline">Yakınındaki cihaza. Sunucuya yüklemeden.</div>
-        </div>
-      </div>
-      <div id="status" class="status off"><span class="status-dot"></span> Bağlı değil</div>
-    </header>
-
-    <section class="hero">
-      <div class="hero-copy">
-        <span class="eyebrow">WEB SHARE</span>
-        <h1>Gönder. Al. Bitti.</h1>
-        <p>Telefon ve bilgisayar arasında dosya veya metin paylaşmak için bir oda oluştur.</p>
-      </div>
-    </section>
-
-    <div class="steps">
-      <span class="step active"><b>1</b> Odayı bağla</span>
-      <span class="step"><b>2</b> İçeriği seç</span>
-      <span class="step"><b>3</b> Gönder</span>
-    </div>
-
-    <section class="card room-card">
-      <div class="section-title-row">
-        <div>
-          <span class="section-number">01</span>
-          <h2>Oda bağlantısı</h2>
-          <p>İki cihazın aynı odaya girmesi yeterli.</p>
-        </div>
-        <div class="connection-pill"><span class="status-dot"></span> Uçtan uca</div>
-      </div>
-
-      <div class="room-panel">
-        <div class="room-code-wrap">
-          <span class="field-label">ODA KODU</span>
-          <div id="roomCode" class="room-code">—</div>
-        </div>
-        <button id="copyRoom" class="tonal" disabled>Kodu kopyala</button>
-      </div>
-
-      <div class="room-actions">
-        <button id="create" class="filled">Yeni oda oluştur</button>
-        <div class="join-group">
-          <input id="roomInput" maxlength="6" autocomplete="off" placeholder="6 haneli kod" aria-label="Oda kodu">
-          <button id="join" class="outlined">Katıl</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="card share-card">
-      <div class="section-title-row">
-        <div>
-          <span class="section-number">02</span>
-          <h2>İçeriği seç</h2>
-          <p>Dosya gönderebilir veya kısa bir metin paylaşabilirsin.</p>
-        </div>
-      </div>
-
-      <div class="share-stack">
-        <article class="mode-card">
-          <div class="mode-heading">
-            <div class="mode-icon file">↥</div>
-            <div>
-              <h3>Dosya gönder</h3>
-              <p>Birden fazla dosya seçebilir veya sürükleyebilirsin.</p>
-            </div>
-          </div>
-          <label for="file" class="drop">
-            <input id="file" type="file" multiple>
-            <span class="drop-symbol">＋</span>
-            <strong>Dosya seç</strong>
-            <small>veya buraya sürükle</small>
-          </label>
-          <div id="fileList" class="list"></div>
-          <button id="sendFile" class="filled full" disabled>Dosyaları gönder</button>
-        </article>
-
-        <article class="mode-card">
-          <div class="mode-heading">
-            <div class="mode-icon text">T</div>
-            <div>
-              <h3>Metin gönder</h3>
-              <p>Not, bağlantı, kod veya kısa mesaj paylaş.</p>
-            </div>
-          </div>
-          <textarea id="text" maxlength="20000" placeholder="Buraya yaz…"></textarea>
-          <div class="text-foot">
-            <small id="count">0 / 20.000</small>
-            <button id="sendText" class="filled" disabled>Metni gönder</button>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="card activity-card">
-      <div class="section-title-row compact">
-        <div>
-          <span class="section-number">03</span>
-          <h2>Aktivite</h2>
-        </div>
-        <button id="clear" class="text-button">Temizle</button>
-      </div>
-      <div id="activity" class="activity">
-        <p class="muted">Bir oda oluştur veya mevcut odaya katıl.</p>
-      </div>
-    </section>
-
-    <footer>Droppoint • Tarayıcı üzerinden doğrudan paylaşım</footer>
-  </main>
-
-  <template id="fileItem">
-    <div class="file-item">
-      <span class="file-icon">↗</span>
-      <div class="meta"><b></b><small></small></div>
-      <span class="progress"></span>
-    </div>
-  </template>
-
-  <script src="app.js"></script>
-</body>
-</html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#6750A4"><title>Droppoint — Web Share</title><link rel="stylesheet" href="styles.css"></head>
+<body data-page="home">
+<header class="topbar"><a class="brand-lockup" href="/"><span class="brand-mark">D</span><span><b>Droppoint</b><small>Web Share</small></span></a></header>
+<main class="page page-center">
+<section class="hero">
+<span class="eyebrow">DOSYA • METİN • CİHAZDAN CİHAZA</span>
+<h1>Gönder.<br><em>Al. Bitti.</em></h1>
+<p>Telefonundan bilgisayarına veya başka bir cihaza dosya ve metin gönder. Hesap yok, kurulum yok.</p>
+<div class="hero-actions"><a class="m3-btn filled" href="room.html?mode=create">Oda oluştur</a><a class="m3-btn tonal" href="room.html?mode=join">Odaya katıl</a></div>
+</section>
+<section class="feature-list">
+<article class="feature-card"><span class="icon-box">⇄</span><div><h2>Doğrudan aktarım</h2><p>Dosyalar tarayıcılar arasında WebRTC ile aktarılır; sunucuda dosya depolamak gerekmez.</p></div></article>
+<article class="feature-card"><span class="icon-box">6</span><div><h2>Basit oda kodu</h2><p>Altı haneli kodu diğer cihaza ver ve eşleşmeyi başlat.</p></div></article>
+<article class="feature-card"><span class="icon-box">⌁</span><div><h2>Mobil + masaüstü</h2><p>Aynı akış telefon, tablet ve bilgisayarda rahatça çalışır.</p></div></article>
+</section>
+</main>
+<footer class="site-footer">Droppoint · Basit, hızlı, özel paylaşım</footer>
+</body></html>
