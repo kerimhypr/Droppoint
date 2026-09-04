@@ -20,9 +20,13 @@ app.get('/api/rooms/:code/files/:itemId',(req,res)=>{const room=getRoom(String(r
 app.use(express.static(__dirname));
 app.use((_req,res)=>res.sendFile(path.join(__dirname,'index.html')));
 const server=http.createServer(app);const wss=new WebSocketServer({server});
-wss.on('connection',ws=>{ws.on('message',raw=>{let msg;try{msg=JSON.parse(raw.toString())}catch{return}
-if(msg.type==='create'){leave(ws);let code=id();while(rooms.has(code))code=id();rooms.set(code,{peers:new Set([ws]),items:[],expiresAt:Date.now()+ROOM_TTL});ws.room=code;ws.send(JSON.stringify({type:'created',room:code,items:[]}));return}
-if(msg.type==='join'){leave(ws);const code=String(msg.room||'').trim().toUpperCase();const room=getRoom(code);if(!/^[A-Z0-9]{6}$/.test(code)||!room){ws.send(JSON.stringify({type:'error',message:'Oda bulunamadı veya süresi doldu.'}));return}for(const peer of room.peers)if(peer.readyState===1)peer.send(JSON.stringify({type:'peer-joined'}));room.peers.add(ws);ws.room=code;touch(room);ws.send(JSON.stringify({type:'joined',room:code,items:room.items.map(publicItem)}));return}}
-);ws.on('close',()=>leave(ws))});
+wss.on('connection',ws=>{
+ ws.on('message',raw=>{
+  let msg;try{msg=JSON.parse(raw.toString())}catch{return}
+  if(msg.type==='create'){leave(ws);let code=id();while(rooms.has(code))code=id();rooms.set(code,{peers:new Set([ws]),items:[],expiresAt:Date.now()+ROOM_TTL});ws.room=code;ws.send(JSON.stringify({type:'created',room:code,items:[]}));return}
+  if(msg.type==='join'){leave(ws);const code=String(msg.room||'').trim().toUpperCase();const room=getRoom(code);if(!/^[A-Z0-9]{6}$/.test(code)||!room){ws.send(JSON.stringify({type:'error',message:'Oda bulunamadı veya süresi doldu.'}));return}room.peers.add(ws);ws.room=code;touch(room);ws.send(JSON.stringify({type:'joined',room:code,items:room.items.map(publicItem)}));broadcast(code,{type:'room-updated'});return}
+ });
+ ws.on('close',()=>leave(ws));
+});
 setInterval(()=>{for(const [code,room] of rooms)if(room.expiresAt<Date.now())rooms.delete(code)},60000).unref();
 const port=Number(process.env.PORT)||3000;server.listen(port,'0.0.0.0',()=>console.log(`Droppoint listening on ${port}`));
