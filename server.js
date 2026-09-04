@@ -5,7 +5,7 @@ const { WebSocketServer } = require('ws');
 
 const app = express();
 app.use(express.static(__dirname));
-app.get('*', (_req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.use((_req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
@@ -29,23 +29,19 @@ wss.on('connection', ws => {
       leave(ws);
       let code = id();
       while (rooms.has(code)) code = id();
-      rooms.set(code, new Set([ws]));
-      ws.room = code;
-      ws.send(JSON.stringify({ type: 'created', room: code }));
-      return;
+      rooms.set(code, new Set([ws])); ws.room = code;
+      ws.send(JSON.stringify({ type: 'created', room: code })); return;
     }
     if (msg.type === 'join') {
       leave(ws);
       const code = String(msg.room || '').trim().toUpperCase();
-      if (!/^[A-Z0-9]{4,10}$/.test(code) || !rooms.has(code)) {
-        ws.send(JSON.stringify({ type: 'error', message: 'Oda bulunamadı.' }));
-        return;
+      if (!/^[A-Z0-9]{6}$/.test(code) || !rooms.has(code)) {
+        ws.send(JSON.stringify({ type: 'error', message: 'Oda bulunamadı.' })); return;
       }
       const peers = rooms.get(code);
-      for (const peer of peers) peer.send(JSON.stringify({ type: 'peer-joined' }));
+      for (const peer of peers) if (peer.readyState === 1) peer.send(JSON.stringify({ type: 'peer-joined' }));
       peers.add(ws); ws.room = code;
-      ws.send(JSON.stringify({ type: 'joined', room: code }));
-      return;
+      ws.send(JSON.stringify({ type: 'joined', room: code })); return;
     }
     if (['offer','answer','ice'].includes(msg.type) && ws.room) {
       for (const peer of rooms.get(ws.room) || []) {
